@@ -8,8 +8,8 @@
 
     <!-- Custom Colors -->
     <color name="white">#c8d6e5</color>
-    <color name="primary">#ff6b6b</color>
-    <color name="primary_variant">#ee5253</color>
+    <color name="primary_variant">#ff6b6b</color>
+    <color name="primary">#ee5253</color>
     <color name="secondary">#5f27cd</color>
     <color name="secondary_variant">#341f97</color>
     <color name="info">#48dbfb</color>
