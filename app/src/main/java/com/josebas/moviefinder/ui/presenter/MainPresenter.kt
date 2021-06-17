@@ -6,7 +6,6 @@ import com.josebas.moviefinder.ui.HomeFragment
 import com.josebas.moviefinder.ui.MovieFragment
 import com.josebas.moviefinder.ui.SearchFragment
 import com.josebas.moviefinder.ui.SeriesFragment
-import me.ibrahimsn.lib.SmoothBottomBar
 
 class MainPresenter {
 
