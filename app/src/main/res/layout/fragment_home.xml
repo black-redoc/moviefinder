@@ -18,8 +18,8 @@
             android:layout_height="30dp">
 
                 <TextView
-                    android:text="Top New"
-                    android:textSize="25sp"
+                    android:text="@string/top_new"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
                     android:layout_marginStart="20dp"
                     android:layout_width="wrap_content"

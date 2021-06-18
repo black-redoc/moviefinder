@@ -1,41 +1,43 @@
 package com.josebas.moviefinder.ui.presenter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.josebas.moviefinder.ui.HomeFragment
 import com.josebas.moviefinder.ui.MovieFragment
 import com.josebas.moviefinder.ui.SearchFragment
 import com.josebas.moviefinder.ui.SeriesFragment
 
-class MainPresenter {
+class MainPresenter(private val view: View) {
 
-    private val homeFragment = HomeFragment()
-    private val searchFragment = SearchFragment()
-    private val seriesFragment = SeriesFragment()
-    private val movieFragment = MovieFragment()
-    private lateinit var supportFragmentManager: FragmentManager
-    private var fragmentContainer: Int? = null
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var searchFragment: SearchFragment
+    private lateinit var seriesFragment: SeriesFragment
+    private lateinit var movieFragment: MovieFragment
 
-    fun initFragment(supportFragmentManager: FragmentManager, fragmentContainer: Int) {
-        this.fragmentContainer = fragmentContainer
-        this.supportFragmentManager = supportFragmentManager
-        replaceFragment(homeFragment)
+    interface View {
+        fun replaceFragment(fragment: Fragment)
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        with(supportFragmentManager.beginTransaction()) {
-            replace(fragmentContainer!!, fragment)
-            commit()
-        }
+    fun onCreate(
+        searchFragment: SearchFragment,
+        seriesFragment: SeriesFragment,
+        movieFragment: MovieFragment,
+        homeFragment: HomeFragment
+    ) {
+        this.searchFragment = searchFragment
+        this.seriesFragment = seriesFragment
+        this.movieFragment = movieFragment
+        this.homeFragment = homeFragment
+
+        view.replaceFragment(homeFragment)
     }
 
-    fun onUpdateFragment(): ((Int) -> Unit) = { it: Int ->
-        when(it) {
-            0 -> replaceFragment(searchFragment)
-            1 -> replaceFragment(movieFragment)
-            2 -> replaceFragment(homeFragment)
-            3 -> replaceFragment(seriesFragment)
-            else -> replaceFragment(homeFragment)
+    fun onUpdateFragment(): (Int) -> Unit = { item: Int ->
+        when(item) {
+            0 -> view.replaceFragment(searchFragment)
+            1 -> view.replaceFragment(movieFragment)
+            2 -> view.replaceFragment(homeFragment)
+            3 -> view.replaceFragment(seriesFragment)
+            else -> view.replaceFragment(homeFragment)
         }
     }
 }
