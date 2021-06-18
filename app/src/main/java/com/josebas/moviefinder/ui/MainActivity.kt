@@ -7,12 +7,13 @@ import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.ActivityMainBinding
 import com.josebas.moviefinder.ui.presenter.MainPresenter
 
-class MainActivity : AppCompatActivity(), MainPresenter.View{
-    private val mainPresenter = MainPresenter(this)
-    private val homeFragment = HomeFragment()
-    private val searchFragment = SearchFragment()
-    private val seriesFragment = SeriesFragment()
-    private val movieFragment = MovieFragment()
+class MainActivity : AppCompatActivity(), MainPresenter.View {
+
+    override val homeFragment = HomeFragment()
+    override val searchFragment = SearchFragment()
+    override val seriesFragment = SeriesFragment()
+    override val movieFragment = MovieFragment()
+    private lateinit var mainPresenter: MainPresenter
 
     private lateinit var binding: ActivityMainBinding
 
@@ -20,8 +21,10 @@ class MainActivity : AppCompatActivity(), MainPresenter.View{
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        mainPresenter = MainPresenter(this)
+
         with(binding) {
-            mainPresenter.onCreate(searchFragment, seriesFragment, movieFragment, homeFragment)
+            mainPresenter.onCreate()
             bottomBar.onItemSelected = mainPresenter.onUpdateFragment()
 
             setContentView(root)
