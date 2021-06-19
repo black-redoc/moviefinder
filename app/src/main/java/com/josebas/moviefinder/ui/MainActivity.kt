@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.ActivityMainBinding
+import com.josebas.moviefinder.ui.fragments.HomeFragment
+import com.josebas.moviefinder.ui.fragments.MovieFragment
+import com.josebas.moviefinder.ui.fragments.SearchFragment
+import com.josebas.moviefinder.ui.fragments.SeriesFragment
 import com.josebas.moviefinder.ui.presenter.MainPresenter
 
 class MainActivity : AppCompatActivity(), MainPresenter.View {

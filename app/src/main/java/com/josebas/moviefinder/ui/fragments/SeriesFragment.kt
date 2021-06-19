@@ -1,4 +1,4 @@
-package com.josebas.moviefinder.ui
+package com.josebas.moviefinder.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
