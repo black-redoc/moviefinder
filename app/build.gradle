@@ -44,6 +44,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     // image view extension
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
+    // dependency injection
+    implementation 'org.kodein.di:kodein-di-generic-jvm:6.4.1'
+    implementation 'org.kodein.di:kodein-di-framework-android-x:6.4.1'
     // domain module
     implementation project(':app:domain')
 

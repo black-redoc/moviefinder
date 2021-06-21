@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.josebas.moviefinder.domain.Movie
 
-class DetailMovieViewModel: ViewModel() {
+class MovieDetailViewModel: ViewModel() {
     private val movieLiveData = MutableLiveData<Movie>()
 
     fun setMovie(movie: Movie) {
