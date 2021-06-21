@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,6 +10,11 @@
     android:background="@color/black"
     tools:context=".ui.fragments.HomeFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/movieTitle"
             android:orientation="horizontal"
@@ -19,7 +24,7 @@
             android:layout_height="30dp">
 
             <TextView
-                android:text="@string/top_new"
+                android:text="@string/top_rated"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:layout_marginStart="20dp"
@@ -41,5 +46,68 @@
             android:paddingHorizontal="30dp"
             android:layout_height="0dp"/>
 
-</LinearLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/movieDramaTitle"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+
+        android:layout_height="30dp">
+
+        <TextView
+            android:text="@string/popular"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/ic_right_arrow"
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerDramaContainer"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="30dp"
+        android:layout_height="0dp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/movieActrionTitle"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+
+        android:layout_height="30dp">
+
+        <TextView
+            android:text="@string/latest"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/ic_right_arrow"
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerActionContainer"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="30dp"
+        android:layout_height="0dp"/>
+
+    </LinearLayout>
+</ScrollView>
 

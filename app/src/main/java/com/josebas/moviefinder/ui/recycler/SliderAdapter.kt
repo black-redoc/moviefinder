@@ -34,6 +34,7 @@ class SliderAdapter(private val dataSet: List<Movie>) :
             Glide
                 .with(view)
                 .load(movie.posterPath)
+                .placeholder(R.drawable.loading)
                 .into(kbsSlider)
 
             movieTitle.text = movie.originalTitle
