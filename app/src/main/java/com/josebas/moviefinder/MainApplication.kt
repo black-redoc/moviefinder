@@ -13,6 +13,6 @@ class MainApplication : Application(), KodeinAware {
     override val kodein by Kodein.lazy {
         import(androidXModule(this@MainApplication))
 
-        bind<MovieDetailViewModel>() with singleton { instance() }
+        bind<MovieDetailViewModel>() with singleton { MovieDetailViewModel() }
     }
 }
