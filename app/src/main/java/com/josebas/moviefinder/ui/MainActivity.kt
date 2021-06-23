@@ -3,6 +3,8 @@ package com.josebas.moviefinder.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.ActivityMainBinding
 import com.josebas.moviefinder.ui.fragments.HomeFragment

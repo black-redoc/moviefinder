@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.MovieDetailFragmentBinding
@@ -29,6 +31,18 @@ class MovieDetailFragment : Fragment(), KodeinAware {
         binding = MovieDetailFragmentBinding.inflate(inflater, container, false)
 
         with(binding) {
+            val mainActivity = activity as AppCompatActivity
+
+            mainActivity.setSupportActionBar(toolbar)
+            mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+            toolbar.setNavigationOnClickListener {
+                parentFragmentManager.beginTransaction().run {
+                    replace(R.id.fragment_container, HomeFragment())
+                    commit()
+                }
+            }
+
             viewModel.movieData.observe(viewLifecycleOwner, {
                 collapsingToolbar.title = it.originalTitle
                 overview.text = it.overview
@@ -37,13 +51,6 @@ class MovieDetailFragment : Fragment(), KodeinAware {
                     .load(it.posterPath)
                     .placeholder(R.drawable.image_placeholder)
                     .into(posterImage)
-
-                backButton.setOnClickListener {
-                    parentFragmentManager.beginTransaction().run {
-                        replace(R.id.fragment_container, HomeFragment())
-                        commit()
-                    }
-                }
             })
         }
 

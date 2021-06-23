@@ -47,4 +47,14 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/movieFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.josebas.moviefinder.ui.fragments.MovieDetailFragment"
+        android:label="MovieDetailFragment"
+        tools:layout="@layout/movie_detail_fragment">
+        <action
+            android:id="@+id/action_MovieDetailFragment_to_HomeFragment"
+            app:destination="@+id/homeFragment"/>
+    </fragment>
 </navigation>
