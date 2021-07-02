@@ -10,19 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flaviofaria.kenburnsview.KenBurnsView
 import com.josebas.moviefinder.R
+import com.josebas.moviefinder.domain.MotionPicture
 import com.josebas.moviefinder.domain.Movie
+import com.josebas.moviefinder.domain.TVShow
 import com.josebas.moviefinder.ui.fragments.MovieDetailFragment
-import com.josebas.moviefinder.ui.viewmodel.MovieDetailViewModel
+import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 
 class SliderAdapter(
-    private val dataSet: List<Movie>,
-    private val movieDetailViewModel: MovieDetailViewModel
+    private val dataSet: List<MotionPicture>,
+    private val motionPictureDetailViewModel: MotionPictureDetailViewModel
 ) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_container_slider, parent, false)
-        return ViewHolder(view, movieDetailViewModel)
+        return ViewHolder(view, motionPictureDetailViewModel)
     }
 
     override fun onBindViewHolder(
@@ -34,22 +36,26 @@ class SliderAdapter(
 
     class ViewHolder(
         private val view: View,
-        private val movieDetailViewModel: MovieDetailViewModel
+        private val motionPictureDetailViewModel: MotionPictureDetailViewModel
     ) : RecyclerView.ViewHolder(view) {
         private val movieTitle: TextView by lazy { view.findViewById(R.id.movieTitle) }
         private val cardView: CardView by lazy { view.findViewById(R.id.cardView) }
         private val kbsSlider: KenBurnsView = view.findViewById(R.id.kbvSlider)
 
-        fun render(movie: Movie) {
+        fun render(motion: MotionPicture) {
             Glide
                 .with(view)
-                .load(movie.posterPath)
+                .load(motion.posterPath)
                 .placeholder(R.drawable.image_placeholder)
                 .into(kbsSlider)
 
-            movieTitle.text = movie.originalTitle
+            when (motion) {
+                is Movie -> movieTitle.text = motion.originalTitle
+                is TVShow -> movieTitle.text = motion.originalName
+            }
+
             cardView.setOnClickListener {
-                movieDetailViewModel.setMovie(movie)
+                motionPictureDetailViewModel.setMovie(motion)
                 val activity = view.context as AppCompatActivity
                 activity
                     .supportFragmentManager

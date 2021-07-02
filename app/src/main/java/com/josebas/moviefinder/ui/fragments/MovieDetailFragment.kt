@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.MovieDetailFragmentBinding
-import com.josebas.moviefinder.ui.viewmodel.MovieDetailViewModel
+import com.josebas.moviefinder.domain.Movie
+import com.josebas.moviefinder.domain.TVShow
+import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -20,7 +20,7 @@ import org.kodein.di.generic.instance
 class MovieDetailFragment : Fragment(), KodeinAware {
 
     override val kodein by closestKodein()
-    private val viewModel by instance<MovieDetailViewModel>()
+    private val viewModel by instance<MotionPictureDetailViewModel>()
     private lateinit var binding: MovieDetailFragmentBinding
 
     override fun onCreateView(
@@ -30,6 +30,12 @@ class MovieDetailFragment : Fragment(), KodeinAware {
     ): View {
         binding = MovieDetailFragmentBinding.inflate(inflater, container, false)
 
+        loadMovies()
+
+        return binding.root
+    }
+
+    private fun loadMovies() {
         with(binding) {
             val mainActivity = activity as AppCompatActivity
 
@@ -43,8 +49,12 @@ class MovieDetailFragment : Fragment(), KodeinAware {
                 }
             }
 
-            viewModel.movieData.observe(viewLifecycleOwner, {
-                collapsingToolbar.title = it.originalTitle
+            viewModel.motionPictureLiveData.observe(viewLifecycleOwner, {
+                when(it) {
+                    is Movie -> collapsingToolbar.title = it.originalTitle
+                    is TVShow -> collapsingToolbar.title = it.originalName
+                }
+
                 overview.text = it.overview
                 Glide
                     .with(this@MovieDetailFragment)
@@ -53,7 +63,5 @@ class MovieDetailFragment : Fragment(), KodeinAware {
                     .into(posterImage)
             })
         }
-
-        return binding.root
     }
 }

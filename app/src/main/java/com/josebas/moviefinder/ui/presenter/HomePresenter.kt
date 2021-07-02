@@ -6,13 +6,14 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.josebas.moviefinder.domain.datasource.InMemoryMovieDataSource
 import com.josebas.moviefinder.ui.recycler.SliderAdapter
-import com.josebas.moviefinder.ui.viewmodel.MovieDetailViewModel
+import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import kotlin.math.abs
 
-class HomePresenter(private val movieDetailViewModel: MovieDetailViewModel) {
+class HomePresenter(private val motionPictureDetailViewModel: MotionPictureDetailViewModel) {
+    private val inMemoryMovieDataSource = InMemoryMovieDataSource()
 
     fun renderViewPager(viewPagerContainer: ViewPager2) = with(viewPagerContainer) {
-        adapter = SliderAdapter(InMemoryMovieDataSource.movies, movieDetailViewModel)
+        adapter = SliderAdapter(inMemoryMovieDataSource.getMovies(), motionPictureDetailViewModel)
 
         clipToPadding = false
         clipChildren = false

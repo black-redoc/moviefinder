@@ -1,16 +1,17 @@
 package com.josebas.moviefinder.domain.datasource
 
 import com.josebas.moviefinder.domain.Genre
+import com.josebas.moviefinder.domain.MotionPicture
 import com.josebas.moviefinder.domain.Movie
 import java.time.LocalDate
 
 const val baseImageUrl = "https://image.tmdb.org/t/p/w500"
 
-object InMemoryMovieDataSource {
+class InMemoryMovieDataSource {
 
-    val genresDataSource = GenresDataSource()
+    private val genresDataSource = GenresDataSource()
 
-    val movies = listOf(
+    private val movies = listOf(
         Movie(
             337404,
             "en",
@@ -97,6 +98,8 @@ object InMemoryMovieDataSource {
             listOf(28, 878, 12).findGenres(genresDataSource)
         )
     )
+
+    fun getMovies(): List<MotionPicture> = movies
 }
 
 fun String.toLocalDate(): LocalDate = LocalDate.parse(this)
