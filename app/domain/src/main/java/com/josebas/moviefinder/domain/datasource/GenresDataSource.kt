@@ -2,8 +2,8 @@ package com.josebas.moviefinder.domain.datasource
 
 import com.josebas.moviefinder.domain.Genre
 
-object GenresDataSource {
-    val genres = listOf(
+class GenresDataSource {
+    private val genres = listOf(
         Genre(28, "Action"),
         Genre(12, "Adventure"),
         Genre(16, "Animation"),
@@ -24,4 +24,6 @@ object GenresDataSource {
         Genre(10752, "War"),
         Genre(37, "Western")
     )
+
+    fun getGenres() : List<Genre> = genres
 }

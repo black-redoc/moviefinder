@@ -7,6 +7,9 @@ import java.time.LocalDate
 const val baseImageUrl = "https://image.tmdb.org/t/p/w500"
 
 object InMemoryMovieDataSource {
+
+    val genresDataSource = GenresDataSource()
+
     val movies = listOf(
         Movie(
             337404,
@@ -24,7 +27,7 @@ object InMemoryMovieDataSource {
             "2021-05-26".toLocalDate(),
             "$baseImageUrl/rTh4K5uw9HypmpGslcKd4QfHl93.jpg",
             "$baseImageUrl/8ChCpCYxh9YXusmHwcE9YzP0TSG.jpg",
-            listOf(35, 80).findGenres()
+            listOf(35, 80).findGenres(genresDataSource)
         ),
         Movie(
             423108,
@@ -38,7 +41,7 @@ object InMemoryMovieDataSource {
             "2021-05-25".toLocalDate(),
             "$baseImageUrl/xbSuFiJbbBWCkyCCKIMfuDCA4yV.jpg",
             "$baseImageUrl/qi6Edc1OPcyENecGtz8TF0DUr9e.jpg",
-            listOf(27,9648, 53).findGenres()
+            listOf(27,9648, 53).findGenres(genresDataSource)
         ),
         Movie(
             637649,
@@ -52,7 +55,7 @@ object InMemoryMovieDataSource {
             "2021-04-22".toLocalDate(),
             "$baseImageUrl/M7SUK85sKjaStg4TKhlAVyGlz3.jpg",
             "$baseImageUrl/70AV2Xx5FQYj20labp0EGdbjI6E.jpg",
-            listOf(80, 28).findGenres()
+            listOf(80, 28).findGenres(genresDataSource)
         ),
         Movie(
             717192,
@@ -64,7 +67,7 @@ object InMemoryMovieDataSource {
             "2021-05-14".toLocalDate(),
             "$baseImageUrl/w6n1pu9thpCVHILejsuhKf3tNCV.jpg",
             "$baseImageUrl/fejok33Ijc6SppiEU1cfwA9Mo2.jpg",
-            listOf(28, 80, 18).findGenres()
+            listOf(28, 80, 18).findGenres(genresDataSource)
         ),
         Movie(
             804435,
@@ -78,7 +81,7 @@ object InMemoryMovieDataSource {
             "2021-04-16".toLocalDate(),
             "$baseImageUrl/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
             "$baseImageUrl/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
-            listOf(28, 80, 53).findGenres()
+            listOf(28, 80, 53).findGenres(genresDataSource)
         ),
         Movie(
             399566,
@@ -91,13 +94,13 @@ object InMemoryMovieDataSource {
             "2021-03-24".toLocalDate(),
             "$baseImageUrl/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
             "$baseImageUrl/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
-            listOf(28, 878, 12).findGenres()
+            listOf(28, 878, 12).findGenres(genresDataSource)
         )
     )
 }
 
 fun String.toLocalDate(): LocalDate = LocalDate.parse(this)
 
-fun List<Int>.findGenres(): List<Genre> = this.map {
-    GenresDataSource.genres.find { genre -> it == genre.id } ?: Genre(0, "No genre found")
+fun List<Int>.findGenres(genresDataSource: GenresDataSource): List<Genre> = this.map {
+    genresDataSource.getGenres().find { genre -> it == genre.id } ?: Genre(0, "No genre found")
 }
