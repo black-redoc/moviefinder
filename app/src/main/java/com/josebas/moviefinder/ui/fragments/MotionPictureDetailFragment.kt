@@ -17,7 +17,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class MovieDetailFragment : Fragment(), KodeinAware {
+class MotionPictureDetailFragment : Fragment(), KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModel by instance<MotionPictureDetailViewModel>()
@@ -57,7 +57,7 @@ class MovieDetailFragment : Fragment(), KodeinAware {
 
                 overview.text = it.overview
                 Glide
-                    .with(this@MovieDetailFragment)
+                    .with(this@MotionPictureDetailFragment)
                     .load(it.posterPath)
                     .placeholder(R.drawable.image_placeholder)
                     .into(posterImage)

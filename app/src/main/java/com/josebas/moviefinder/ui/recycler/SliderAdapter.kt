@@ -13,7 +13,7 @@ import com.josebas.moviefinder.R
 import com.josebas.moviefinder.domain.MotionPicture
 import com.josebas.moviefinder.domain.Movie
 import com.josebas.moviefinder.domain.TVShow
-import com.josebas.moviefinder.ui.fragments.MovieDetailFragment
+import com.josebas.moviefinder.ui.fragments.MotionPictureDetailFragment
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 
 class SliderAdapter(
@@ -60,7 +60,7 @@ class SliderAdapter(
                 activity
                     .supportFragmentManager
                     .beginTransaction().run {
-                        val movieDetailFragment = MovieDetailFragment()
+                        val movieDetailFragment = MotionPictureDetailFragment()
                         replace(R.id.fragment_container, movieDetailFragment)
                         commit()
                     }
