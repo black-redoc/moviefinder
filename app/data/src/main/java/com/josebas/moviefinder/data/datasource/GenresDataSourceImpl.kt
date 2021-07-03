@@ -1,9 +1,10 @@
-package com.josebas.moviefinder.domain.datasource
+package com.josebas.moviefinder.data.datasource
 
 import com.josebas.moviefinder.domain.Genre
+import com.josebas.moviefinder.domain.common.GenresDataSource
 
-class GenresDataSource {
-    private val genres = listOf(
+class GenresDataSourceImpl: GenresDataSource {
+     private val genres = listOf(
         Genre(28, "Action"),
         Genre(12, "Adventure"),
         Genre(16, "Animation"),
@@ -25,5 +26,5 @@ class GenresDataSource {
         Genre(37, "Western")
     )
 
-    fun getGenres() : List<Genre> = genres
+    override fun getLocalGenres() : List<Genre> = genres
 }

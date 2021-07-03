@@ -1,5 +1,4 @@
-package com.josebas.moviefinder.domain.datasource
-
+package com.josebas.moviefinder.data.datasource
 
 import com.josebas.moviefinder.domain.Movie
 import com.josebas.moviefinder.domain.common.baseImageUrl
@@ -8,7 +7,7 @@ import com.josebas.moviefinder.domain.common.toLocalDate
 
 class InMemoryMovieDataSource {
 
-    private val genresDataSource = GenresDataSource()
+    private val genresDataSource = GenresDataSourceImpl()
 
     private val movies = listOf(
         Movie(

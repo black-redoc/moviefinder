@@ -51,6 +51,8 @@ dependencies {
     implementation 'org.kodein.di:kodein-di-framework-android-x:6.4.1'
     // domain module
     implementation project(':app:domain')
+    // data module
+    implementation project(':app:data')
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

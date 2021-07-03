@@ -4,10 +4,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.josebas.moviefinder.domain.MotionPicture
-import com.josebas.moviefinder.domain.Movie
-import com.josebas.moviefinder.domain.datasource.InMemoryMovieDataSource
-import com.josebas.moviefinder.domain.datasource.InMemoryTVShowDataSource
+import com.josebas.moviefinder.data.repository.MovieRepository
+import com.josebas.moviefinder.data.repository.TVShowRepository
 import com.josebas.moviefinder.ui.commons.MotionPictureType
 import com.josebas.moviefinder.ui.commons.MovieType
 import com.josebas.moviefinder.ui.commons.TVShowType
@@ -16,17 +14,17 @@ import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import kotlin.math.abs
 
 class HomePresenter(private val motionPictureDetailViewModel: MotionPictureDetailViewModel) {
-    private val inMemoryTVShowDataSource = InMemoryTVShowDataSource()
-    private val inMemoryMovieDataSource = InMemoryMovieDataSource()
+    private val movieRepository = MovieRepository()
+    private val tvShowRepository = TVShowRepository()
 
     fun renderViewPager(viewPagerContainer: ViewPager2, type: MotionPictureType) = with(viewPagerContainer) {
 
         adapter = when(type) {
             is MovieType -> SliderAdapter(
-                inMemoryMovieDataSource.getMovies(), motionPictureDetailViewModel
+                movieRepository.getPopularMovies(), motionPictureDetailViewModel
             )
             is TVShowType -> SliderAdapter(
-                inMemoryTVShowDataSource.getTVShow(), motionPictureDetailViewModel
+                tvShowRepository.getPopularTVShow(), motionPictureDetailViewModel
             )
         }
 
