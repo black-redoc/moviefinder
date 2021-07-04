@@ -8,34 +8,13 @@
     android:background="@color/black"
     tools:context=".ui.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:background="@color/primary_variant"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="70dp">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:cropToPadding="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logo_moviefinder"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/banner"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomBar"/>
 
     <me.ibrahimsn.lib.SmoothBottomBar

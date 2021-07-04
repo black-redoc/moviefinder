@@ -1,11 +1,11 @@
 package com.josebas.moviefinder.data.datasource
 
 import com.josebas.moviefinder.domain.TVShow
+import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.domain.common.baseImageUrl
 import com.josebas.moviefinder.domain.common.findGenres
 
-class InMemoryTVShowDataSource {
-    private val genresDataSource = GenresDataSourceImpl()
+class InMemoryTVShowDataSource(genresDataSource: GenresDataSource) {
 
     private val tvShows = listOf(
         TVShow(

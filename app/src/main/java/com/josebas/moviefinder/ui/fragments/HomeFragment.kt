@@ -9,14 +9,13 @@ import com.josebas.moviefinder.databinding.FragmentHomeBinding
 import com.josebas.moviefinder.ui.commons.MovieType
 import com.josebas.moviefinder.ui.commons.TVShowType
 import com.josebas.moviefinder.ui.presenter.HomePresenter
-import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 class HomeFragment : Fragment(), KodeinAware {
     override val kodein by closestKodein()
-    private val movieDetailViewModel by instance<MotionPictureDetailViewModel>()
+    private val homePresenter: HomePresenter by instance()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mainPresenter: HomePresenter
 
@@ -27,8 +26,8 @@ class HomeFragment : Fragment(), KodeinAware {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        mainPresenter = HomePresenter(movieDetailViewModel)
-
+//        mainPresenter = HomePresenter(motionPictureDetailViewModel, movieRepository)
+        mainPresenter = homePresenter
         renderViewPager()
 
         return binding.root

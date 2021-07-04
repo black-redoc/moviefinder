@@ -13,9 +13,11 @@ import com.josebas.moviefinder.ui.recycler.SliderAdapter
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import kotlin.math.abs
 
-class HomePresenter(private val motionPictureDetailViewModel: MotionPictureDetailViewModel) {
-    private val movieRepository = MovieRepository()
-    private val tvShowRepository = TVShowRepository()
+class HomePresenter(
+    private val motionPictureDetailViewModel: MotionPictureDetailViewModel,
+    private val movieRepository: MovieRepository,
+    private val tvShowRepository: TVShowRepository
+) {
 
     fun renderViewPager(viewPagerContainer: ViewPager2, type: MotionPictureType) = with(viewPagerContainer) {
 

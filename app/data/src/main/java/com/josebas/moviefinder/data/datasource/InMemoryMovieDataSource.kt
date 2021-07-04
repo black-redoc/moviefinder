@@ -1,13 +1,12 @@
 package com.josebas.moviefinder.data.datasource
 
 import com.josebas.moviefinder.domain.Movie
+import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.domain.common.baseImageUrl
 import com.josebas.moviefinder.domain.common.findGenres
 import com.josebas.moviefinder.domain.common.toLocalDate
 
-class InMemoryMovieDataSource {
-
-    private val genresDataSource = GenresDataSourceImpl()
+class InMemoryMovieDataSource(genresDataSource: GenresDataSource) {
 
     private val movies = listOf(
         Movie(
