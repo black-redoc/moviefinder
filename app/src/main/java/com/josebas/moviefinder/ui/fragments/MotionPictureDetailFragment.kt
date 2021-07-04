@@ -1,7 +1,6 @@
 package com.josebas.moviefinder.ui.fragments
 
 import android.os.Bundle
-//import com.josebas.moviefinder.R
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,7 @@ class MotionPictureDetailFragment : Fragment(), KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModel by instance<MotionPictureDetailViewModel>()
+    private val homeFragment: HomeFragment by instance()
     private lateinit var binding: MovieDetailFragmentBinding
 
     override fun onCreateView(
@@ -44,7 +44,7 @@ class MotionPictureDetailFragment : Fragment(), KodeinAware {
 
             toolbar.setNavigationOnClickListener {
                 parentFragmentManager.beginTransaction().run {
-                    replace(R.id.fragment_container, HomeFragment())
+                    replace(R.id.fragment_container, homeFragment)
                     commit()
                 }
             }

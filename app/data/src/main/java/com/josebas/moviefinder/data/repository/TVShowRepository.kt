@@ -5,6 +5,5 @@ import com.josebas.moviefinder.domain.TVShow
 
 class TVShowRepository(private val inMemoryTVShowRepository: InMemoryTVShowDataSource) {
 
-
     fun getPopularTVShow(): List<TVShow> = inMemoryTVShowRepository.getTVShow()
 }

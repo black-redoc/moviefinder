@@ -13,11 +13,8 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class HomeFragment : Fragment(), KodeinAware {
-    override val kodein by closestKodein()
-    private val homePresenter: HomePresenter by instance()
+class HomeFragment(private val homePresenter: HomePresenter) : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var mainPresenter: HomePresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,19 +23,16 @@ class HomeFragment : Fragment(), KodeinAware {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        mainPresenter = HomePresenter(motionPictureDetailViewModel, movieRepository)
-        mainPresenter = homePresenter
         renderViewPager()
-
         return binding.root
     }
 
     private fun renderViewPager() {
         with(binding) {
-            mainPresenter.renderViewPager(viewPagerContainer, MovieType())
-            mainPresenter.renderViewPager(viewPagerDramaContainer, MovieType())
-            mainPresenter.renderViewPager(viewPagerActionContainer, MovieType())
-            mainPresenter.renderViewPager(viewPagerTVShowContainer, TVShowType())
+            homePresenter.renderViewPager(viewPagerContainer, MovieType())
+            homePresenter.renderViewPager(viewPagerDramaContainer, MovieType())
+            homePresenter.renderViewPager(viewPagerActionContainer, MovieType())
+            homePresenter.renderViewPager(viewPagerTVShowContainer, TVShowType())
         }
     }
 }

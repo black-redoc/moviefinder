@@ -7,7 +7,9 @@ import com.josebas.moviefinder.data.datasource.InMemoryTVShowDataSource
 import com.josebas.moviefinder.data.repository.MovieRepository
 import com.josebas.moviefinder.data.repository.TVShowRepository
 import com.josebas.moviefinder.domain.common.GenresDataSource
+import com.josebas.moviefinder.ui.fragments.HomeFragment
 import com.josebas.moviefinder.ui.presenter.HomePresenter
+import com.josebas.moviefinder.ui.presenter.MainPresenter
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -23,5 +25,7 @@ class MainApplication : Application(), KodeinAware {
         bind() from singleton { TVShowRepository(InMemoryTVShowDataSource(instance())) }
         bind() from singleton { MotionPictureDetailViewModel() }
         bind() from provider { HomePresenter(instance(), instance(), instance()) }
+        bind() from factory { view: MainPresenter.View -> MainPresenter(view) }
+        bind() from provider { HomeFragment(instance()) }
     }
 }

@@ -3,8 +3,6 @@ package com.josebas.moviefinder.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.ActivityMainBinding
 import com.josebas.moviefinder.ui.fragments.HomeFragment
@@ -12,22 +10,25 @@ import com.josebas.moviefinder.ui.fragments.MovieFragment
 import com.josebas.moviefinder.ui.fragments.SearchFragment
 import com.josebas.moviefinder.ui.fragments.SeriesFragment
 import com.josebas.moviefinder.ui.presenter.MainPresenter
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.on
 
-class MainActivity : AppCompatActivity(), MainPresenter.View {
+class MainActivity : AppCompatActivity(), MainPresenter.View, KodeinAware {
+    override val kodein by closestKodein()
 
-    override val homeFragment = HomeFragment()
+    override val homeFragment: HomeFragment by instance()
     override val searchFragment = SearchFragment()
     override val seriesFragment = SeriesFragment()
     override val movieFragment = MovieFragment()
-    private lateinit var mainPresenter: MainPresenter
+    private val mainPresenter: MainPresenter by instance(arg = this)
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        mainPresenter = MainPresenter(this)
 
         with(binding) {
             mainPresenter.onCreate()
