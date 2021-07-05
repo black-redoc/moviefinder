@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flaviofaria.kenburnsview.KenBurnsView
 import com.josebas.moviefinder.R
-import com.josebas.moviefinder.domain.MotionPicture
-import com.josebas.moviefinder.domain.Movie
-import com.josebas.moviefinder.domain.TVShow
+import com.josebas.moviefinder.domain.local.MotionPicture
+import com.josebas.moviefinder.domain.local.Movie
+import com.josebas.moviefinder.domain.local.TVShow
 import com.josebas.moviefinder.ui.fragments.MotionPictureDetailFragment
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 

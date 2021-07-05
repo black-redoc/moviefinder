@@ -13,7 +13,6 @@ import com.josebas.moviefinder.ui.presenter.MainPresenter
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.on
 
 class MainActivity : AppCompatActivity(), MainPresenter.View, KodeinAware {
     override val kodein by closestKodein()

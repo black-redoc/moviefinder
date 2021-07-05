@@ -1,4 +1,6 @@
-package com.josebas.moviefinder.domain
+package com.josebas.moviefinder.domain.local
+
+import com.josebas.moviefinder.domain.Genre
 
 interface MotionPicture {
     val id: Int

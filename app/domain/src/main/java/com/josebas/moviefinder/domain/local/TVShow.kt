@@ -1,14 +1,16 @@
-package com.josebas.moviefinder.domain
+package com.josebas.moviefinder.domain.local
 
+import com.josebas.moviefinder.domain.Genre
 import java.time.LocalDate
 
-data class Movie(
+data class TVShow(
     override val id: Int,
     override val originalLanguage: String,
-    val originalTitle: String,
+    val originalName: String,
     override val overview: String,
-    val releaseDate: LocalDate,
+    val popularity: Float,
     override val posterPath: String?,
     override val backdropPath: String?,
+    val firstAirDate: LocalDate,
     override val genres: List<Genre>
 ) : MotionPicture

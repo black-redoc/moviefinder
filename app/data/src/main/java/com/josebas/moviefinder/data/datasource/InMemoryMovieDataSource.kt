@@ -1,6 +1,6 @@
 package com.josebas.moviefinder.data.datasource
 
-import com.josebas.moviefinder.domain.Movie
+import com.josebas.moviefinder.domain.local.Movie
 import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.domain.common.baseImageUrl
 import com.josebas.moviefinder.domain.common.findGenres

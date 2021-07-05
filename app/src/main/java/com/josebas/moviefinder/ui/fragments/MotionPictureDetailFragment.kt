@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.MovieDetailFragmentBinding
-import com.josebas.moviefinder.domain.Movie
-import com.josebas.moviefinder.domain.TVShow
+import com.josebas.moviefinder.domain.local.Movie
+import com.josebas.moviefinder.domain.local.TVShow
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein

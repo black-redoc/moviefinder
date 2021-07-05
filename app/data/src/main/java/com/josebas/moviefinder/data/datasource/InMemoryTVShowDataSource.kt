@@ -1,9 +1,10 @@
 package com.josebas.moviefinder.data.datasource
 
-import com.josebas.moviefinder.domain.TVShow
+import com.josebas.moviefinder.domain.local.TVShow
 import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.domain.common.baseImageUrl
 import com.josebas.moviefinder.domain.common.findGenres
+import com.josebas.moviefinder.domain.common.toLocalDate
 
 class InMemoryTVShowDataSource(genresDataSource: GenresDataSource) {
 
@@ -20,6 +21,7 @@ class InMemoryTVShowDataSource(genresDataSource: GenresDataSource) {
             9580.138F,
             "$baseImageUrl/kEl2t3OhXc3Zb9FBh1AuYzRTgZp.jpg",
             "$baseImageUrl/kEl2t3OhXc3Zb9FBh1AuYzRTgZp.jpg",
+            "2020-10-20".toLocalDate(),
             listOf(18, 10765).findGenres(genresDataSource)
         ),
         TVShow(
@@ -32,6 +34,7 @@ class InMemoryTVShowDataSource(genresDataSource: GenresDataSource) {
             9580.138F,
             "$baseImageUrl/s5k4GqTUGXeUdScNrjpYfiQLKHI.jpg",
             "$baseImageUrl/5b5ZZGECl4FLDBKn3zJ6w6GBPRg.jpg",
+            "2020-10-20".toLocalDate(),
             listOf(35, 18).findGenres(genresDataSource)
         ),
         TVShow(
@@ -46,6 +49,7 @@ class InMemoryTVShowDataSource(genresDataSource: GenresDataSource) {
             1157.562F,
             "$baseImageUrl/8kOWDBK6XlPUzckuHDo3wwVRFwt.jpg",
             "$baseImageUrl/eV3XnUul4UfIivz3kxgeIozeo50.jpg",
+            "2020-10-20".toLocalDate(),
             listOf(16, 35, 10765, 10759).findGenres(genresDataSource)
         ),
     )

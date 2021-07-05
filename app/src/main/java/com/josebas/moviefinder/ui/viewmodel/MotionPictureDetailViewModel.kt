@@ -3,7 +3,7 @@ package com.josebas.moviefinder.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.josebas.moviefinder.domain.MotionPicture
+import com.josebas.moviefinder.domain.local.MotionPicture
 
 class MotionPictureDetailViewModel: ViewModel() {
     private val _motionPictureLiveData = MutableLiveData<MotionPicture>()
