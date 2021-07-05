@@ -1,13 +1,12 @@
 package com.josebas.moviefinder
 
 import android.app.Application
-import com.josebas.moviefinder.common.ConnectivityInterceptorImpl
-import com.josebas.moviefinder.data.common.ConnectivityInterceptor
 import com.josebas.moviefinder.data.datasource.local.GenresDataSourceImpl
 import com.josebas.moviefinder.data.datasource.local.InMemoryMovieDataSource
 import com.josebas.moviefinder.data.datasource.local.InMemoryTVShowDataSource
 import com.josebas.moviefinder.data.datasource.remote.RemoteMovieDataSource
 import com.josebas.moviefinder.data.repository.MovieRepository
+import com.josebas.moviefinder.data.repository.MovieRepositoryImpl
 import com.josebas.moviefinder.data.repository.TVShowRepository
 import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.ui.fragments.HomeFragment
@@ -24,13 +23,17 @@ class MainApplication : Application(), KodeinAware {
         import(androidXModule(this@MainApplication))
 
         bind<GenresDataSource>() with singleton { GenresDataSourceImpl() }
-        bind() from singleton { MovieRepository(InMemoryMovieDataSource(instance())) }
+        bind<MovieRepository>() with singleton {
+            MovieRepositoryImpl(
+                InMemoryMovieDataSource(instance()),
+                RemoteMovieDataSource(),
+                instance()
+            )
+        }
         bind() from singleton { TVShowRepository(InMemoryTVShowDataSource(instance())) }
         bind() from singleton { MotionPictureDetailViewModel() }
-        bind() from provider { HomePresenter(instance(), instance(), instance()) }
+        bind() from provider { HomePresenter(instance()) }
         bind() from factory { view: MainPresenter.View -> MainPresenter(view) }
-        bind() from provider { HomeFragment(instance()) }
-        bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-        bind() from singleton { RemoteMovieDataSource(instance()) }
+        bind() from provider { HomeFragment(instance(), instance(), instance()) }
     }
 }

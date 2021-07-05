@@ -4,31 +4,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.josebas.moviefinder.data.repository.MovieRepository
-import com.josebas.moviefinder.data.repository.TVShowRepository
-import com.josebas.moviefinder.ui.commons.MotionPictureType
-import com.josebas.moviefinder.ui.commons.MovieType
-import com.josebas.moviefinder.ui.commons.TVShowType
+import com.josebas.moviefinder.domain.local.MotionPicture
 import com.josebas.moviefinder.ui.recycler.SliderAdapter
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import kotlin.math.abs
 
-class HomePresenter(
-    private val motionPictureDetailViewModel: MotionPictureDetailViewModel,
-    private val movieRepository: MovieRepository,
-    private val tvShowRepository: TVShowRepository
-) {
+class HomePresenter(private val motionPictureDetailViewModel: MotionPictureDetailViewModel) {
 
-    fun renderViewPager(viewPagerContainer: ViewPager2, type: MotionPictureType) = with(viewPagerContainer) {
-
-        adapter = when(type) {
-            is MovieType -> SliderAdapter(
-                movieRepository.getPopularMovies(), motionPictureDetailViewModel
-            )
-            is TVShowType -> SliderAdapter(
-                tvShowRepository.getPopularTVShow(), motionPictureDetailViewModel
-            )
-        }
+    fun renderViewPager(
+        viewPagerContainer: ViewPager2,
+        motionPictureList: List<MotionPicture>
+    ) = with(viewPagerContainer) {
+        adapter = SliderAdapter(motionPictureList, motionPictureDetailViewModel)
 
         clipToPadding = false
         clipChildren = false

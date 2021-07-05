@@ -46,7 +46,7 @@ class SliderAdapter(
             Glide
                 .with(view)
                 .load(motion.posterPath)
-                .placeholder(R.drawable.image_placeholder)
+                .placeholder(R.drawable.ic_image_not_found)
                 .into(kbsSlider)
 
             when (motion) {

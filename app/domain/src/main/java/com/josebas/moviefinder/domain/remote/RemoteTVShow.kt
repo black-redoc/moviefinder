@@ -8,4 +8,4 @@ data class RemoteTVShow(
     val poster_path: String?,
     val first_air_Date: String?,
     val original_name: String,
-): RemoteMotionPicture()
+)
