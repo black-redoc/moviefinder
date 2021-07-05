@@ -8,16 +8,11 @@ import android.view.ViewGroup
 import com.josebas.moviefinder.data.repository.MovieRepository
 import com.josebas.moviefinder.data.repository.TVShowRepository
 import com.josebas.moviefinder.databinding.FragmentHomeBinding
-import com.josebas.moviefinder.ui.commons.MovieType
-import com.josebas.moviefinder.ui.commons.TVShowType
 import com.josebas.moviefinder.ui.presenter.HomePresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
 class HomeFragment(
     private val homePresenter: HomePresenter,
@@ -40,14 +35,25 @@ class HomeFragment(
     private fun renderViewPager() {
         with(binding) {
             CoroutineScope(Dispatchers.Main).launch {
-
                 val ratedMovies = withContext(Dispatchers.IO) {
                     movieRepository.getRatedMovies()
                 }
+
+                val popularTVShow = withContext(Dispatchers.IO) {
+                    tvShowRepository.getPopularTVShow()
+                }
+
+                val popularMovies = withContext(Dispatchers.IO) {
+                    movieRepository.getPopularMovies()
+                }
+
+                val upComingMovies = withContext(Dispatchers.IO) {
+                    movieRepository.getUpComingMovies()
+                }
                 homePresenter.renderViewPager(viewPagerContainer, ratedMovies)
-                homePresenter.renderViewPager(viewPagerDramaContainer, movieRepository.getPopularMovies())
-                homePresenter.renderViewPager(viewPagerActionContainer, movieRepository.getPopularMovies())
-                homePresenter.renderViewPager(viewPagerTVShowContainer, tvShowRepository.getPopularTVShow())
+                homePresenter.renderViewPager(viewPagerDramaContainer, popularMovies)
+                homePresenter.renderViewPager(viewPagerActionContainer, upComingMovies)
+                homePresenter.renderViewPager(viewPagerTVShowContainer, popularTVShow)
             }
         }
     }

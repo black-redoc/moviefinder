@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.josebas.moviefinder.data.common.API_KEY
 import com.josebas.moviefinder.data.common.BASE_URL
 import retrofit2.converter.gson.GsonConverterFactory
-import com.josebas.moviefinder.domain.remote.RemoteResult
+import com.josebas.moviefinder.domain.remote.RemoteResultMovie
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,7 +14,13 @@ import retrofit2.http.GET
 
 interface RemoteMovieDataSource {
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(): RemoteResult
+    suspend fun getTopRatedMovies(): RemoteResultMovie
+
+    @GET("movie/popular")
+    suspend fun getPopularMovies(): RemoteResultMovie
+
+    @GET("movie/upcoming")
+    suspend fun getUpComingMovies(): RemoteResultMovie
 
     companion object {
         operator fun invoke(): RemoteMovieDataSource {

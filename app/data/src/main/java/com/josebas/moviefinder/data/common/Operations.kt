@@ -19,7 +19,7 @@ fun RemoteTVShow.toLocalTVShow(genresDataSource: GenresDataSource): TVShow = TVS
     "$baseImageUrl/$poster_path",
     "$baseImageUrl/$backdrop_path",
     first_air_date!!.toLocalDate(),
-    genre_ids.findGenres(genresDataSource)
+    genre_ids?.findGenres(genresDataSource) ?: listOf()
 )
 
 fun RemoteMovie.toLocalMovie(genresDataSource: GenresDataSource): Movie = Movie(
@@ -35,7 +35,7 @@ fun RemoteMovie.toLocalMovie(genresDataSource: GenresDataSource): Movie = Movie(
 
 fun List<RemoteTVShow>.toLocalTVShows(
     genresDataSource: GenresDataSource
-): List<TVShow> = asSequence().map { it.toLocalTVShow(genresDataSource) }.toList()
+): List<TVShow> = map { it.toLocalTVShow(genresDataSource) }
 
 fun List<RemoteMovie>.toLocalMovies(
     genresDataSource: GenresDataSource

@@ -5,9 +5,11 @@ import com.josebas.moviefinder.data.datasource.local.GenresDataSourceImpl
 import com.josebas.moviefinder.data.datasource.local.InMemoryMovieDataSource
 import com.josebas.moviefinder.data.datasource.local.InMemoryTVShowDataSource
 import com.josebas.moviefinder.data.datasource.remote.RemoteMovieDataSource
+import com.josebas.moviefinder.data.datasource.remote.RemoteTVShowDataSource
 import com.josebas.moviefinder.data.repository.MovieRepository
 import com.josebas.moviefinder.data.repository.MovieRepositoryImpl
 import com.josebas.moviefinder.data.repository.TVShowRepository
+import com.josebas.moviefinder.data.repository.TVShowRepositoryImpl
 import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.ui.fragments.HomeFragment
 import com.josebas.moviefinder.ui.presenter.HomePresenter
@@ -25,12 +27,16 @@ class MainApplication : Application(), KodeinAware {
         bind<GenresDataSource>() with singleton { GenresDataSourceImpl() }
         bind<MovieRepository>() with singleton {
             MovieRepositoryImpl(
-                InMemoryMovieDataSource(instance()),
                 RemoteMovieDataSource(),
                 instance()
             )
         }
-        bind() from singleton { TVShowRepository(InMemoryTVShowDataSource(instance())) }
+        bind<TVShowRepository>() with singleton {
+            TVShowRepositoryImpl(
+                RemoteTVShowDataSource.invoke(),
+                instance()
+            )
+        }
         bind() from singleton { MotionPictureDetailViewModel() }
         bind() from provider { HomePresenter(instance()) }
         bind() from factory { view: MainPresenter.View -> MainPresenter(view) }
