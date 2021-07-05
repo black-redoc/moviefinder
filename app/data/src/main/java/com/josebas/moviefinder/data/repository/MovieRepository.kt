@@ -1,6 +1,6 @@
 package com.josebas.moviefinder.data.repository
 
-import com.josebas.moviefinder.data.datasource.InMemoryMovieDataSource
+import com.josebas.moviefinder.data.datasource.local.InMemoryMovieDataSource
 import com.josebas.moviefinder.domain.local.Movie
 
 class MovieRepository(private val inMemoryDataSource: InMemoryMovieDataSource) {

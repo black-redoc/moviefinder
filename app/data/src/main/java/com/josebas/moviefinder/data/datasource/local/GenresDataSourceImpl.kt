@@ -1,4 +1,4 @@
-package com.josebas.moviefinder.data.datasource
+package com.josebas.moviefinder.data.datasource.local
 
 import com.josebas.moviefinder.domain.Genre
 import com.josebas.moviefinder.domain.common.GenresDataSource

@@ -9,6 +9,19 @@ java {
 }
 
 dependencies {
+    def retrofit_version = "2.9.0"
+    def ok_http_version = "3.14.9"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.squareup.okhttp3:okhttp:$ok_http_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$ok_http_version"
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation ("com.squareup.retrofit2:retrofit:$retrofit_version"){
+        // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
+        exclude module: 'okhttp'
+    }
+    implementation "com.google.code.gson:gson:2.8.7"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation project(":app:domain")
 }
