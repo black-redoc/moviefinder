@@ -1,13 +1,26 @@
 package com.josebas.moviefinder.data.common
 
-import com.josebas.moviefinder.domain.Genre
 import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.domain.common.baseImageUrl
 import com.josebas.moviefinder.domain.common.findGenres
 import com.josebas.moviefinder.domain.common.toLocalDate
 import com.josebas.moviefinder.domain.local.Movie
+import com.josebas.moviefinder.domain.local.TVShow
 import com.josebas.moviefinder.domain.remote.RemoteMovie
+import com.josebas.moviefinder.domain.remote.RemoteTVShow
 
+
+fun RemoteTVShow.toLocalTVShow(genresDataSource: GenresDataSource): TVShow = TVShow(
+    id,
+    original_language,
+    original_name,
+    overview,
+    popularity,
+    "$baseImageUrl/$poster_path",
+    "$baseImageUrl/$backdrop_path",
+    first_air_date!!.toLocalDate(),
+    genre_ids.findGenres(genresDataSource)
+)
 
 fun RemoteMovie.toLocalMovie(genresDataSource: GenresDataSource): Movie = Movie(
     id,
@@ -17,8 +30,12 @@ fun RemoteMovie.toLocalMovie(genresDataSource: GenresDataSource): Movie = Movie(
     release_date!!.toLocalDate(),
     "$baseImageUrl/$poster_path",
     "$baseImageUrl/$backdrop_path",
-    genres_ids?.findGenres(genresDataSource) ?: listOf<Genre>()
+    genre_ids?.findGenres(genresDataSource) ?: listOf()
 )
+
+fun List<RemoteTVShow>.toLocalTVShows(
+    genresDataSource: GenresDataSource
+): List<TVShow> = asSequence().map { it.toLocalTVShow(genresDataSource) }.toList()
 
 fun List<RemoteMovie>.toLocalMovies(
     genresDataSource: GenresDataSource

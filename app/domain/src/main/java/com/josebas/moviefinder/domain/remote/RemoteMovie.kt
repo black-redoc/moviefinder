@@ -2,7 +2,7 @@ package com.josebas.moviefinder.domain.remote
 
 data class RemoteMovie(
     val backdrop_path: String?,
-    val genres_ids: List<Int>?,
+    val genre_ids: List<Int>?,
     val id: Int,
     val original_title: String,
     val original_language: String,
