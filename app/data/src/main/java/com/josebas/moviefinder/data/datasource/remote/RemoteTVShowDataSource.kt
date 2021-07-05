@@ -3,21 +3,19 @@ package com.josebas.moviefinder.data.datasource.remote
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.josebas.moviefinder.data.common.API_KEY
 import com.josebas.moviefinder.data.common.BASE_URL
-import retrofit2.converter.gson.GsonConverterFactory
 import com.josebas.moviefinder.domain.remote.RemoteResult
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-
-
-interface RemoteMovieDataSource {
-    @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(): RemoteResult
+interface RemoteTVShowDataSource {
+    @GET("tv/latest")
+    suspend fun getLatestTVShow(): RemoteResult
 
     companion object {
-        operator fun invoke(): RemoteMovieDataSource {
+        operator fun invoke(): RemoteTVShowDataSource {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
@@ -34,7 +32,6 @@ interface RemoteMovieDataSource {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
                 .build()
-
             return Retrofit
                 .Builder()
                 .client(okHttpClient)
@@ -42,7 +39,7 @@ interface RemoteMovieDataSource {
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(RemoteMovieDataSource::class.java)
+                .create(RemoteTVShowDataSource::class.java)
         }
     }
 }
