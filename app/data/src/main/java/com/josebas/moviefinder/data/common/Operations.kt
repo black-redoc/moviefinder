@@ -22,4 +22,4 @@ fun RemoteMovie.toLocalMovie(genresDataSource: GenresDataSource): Movie = Movie(
 
 fun List<RemoteMovie>.toLocalMovies(
     genresDataSource: GenresDataSource
-): List<Movie> = map { it.toLocalMovie(genresDataSource) }
+): List<Movie> = asSequence().map { it.toLocalMovie(genresDataSource) }.toList()
