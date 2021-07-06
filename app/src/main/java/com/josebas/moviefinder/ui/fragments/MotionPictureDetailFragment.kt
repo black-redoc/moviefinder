@@ -11,6 +11,7 @@ import com.josebas.moviefinder.R
 import com.josebas.moviefinder.databinding.MovieDetailFragmentBinding
 import com.josebas.moviefinder.domain.local.Movie
 import com.josebas.moviefinder.domain.local.TVShow
+import com.josebas.moviefinder.ui.commons.capital
 import com.josebas.moviefinder.ui.viewmodel.MotionPictureDetailViewModel
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -51,10 +52,29 @@ class MotionPictureDetailFragment : Fragment(), KodeinAware {
 
             viewModel.motionPictureLiveData.observe(viewLifecycleOwner, {
                 when(it) {
-                    is Movie -> collapsingToolbar.title = it.originalTitle
-                    is TVShow -> collapsingToolbar.title = it.originalName
+                    is Movie -> {
+                        collapsingToolbar.title = it.originalTitle
+                        releaseDateText.text = "%s %s, %s".format(
+                            it.releaseDate.month.name,
+                            it.releaseDate.dayOfMonth,
+                            it.releaseDate.year
+                        ).capital
+                    }
+                    is TVShow -> {
+                        collapsingToolbar.title = it.originalName
+                        releaseDateText.text = "%s %s, %s".format(
+                            it.firstAirDate.month.name,
+                            it.firstAirDate.dayOfMonth,
+                            it.firstAirDate.year
+                        ).capital
+                    }
                 }
 
+                genresText.text = it.genres
+                    .asSequence()
+                    .filter { genre -> genre.name != "No genre found" }
+                    .map { genre -> genre.name }
+                    .reduce { acc, genre -> "$acc, $genre"}
                 overview.text = it.overview
                 Glide
                     .with(this@MotionPictureDetailFragment)
