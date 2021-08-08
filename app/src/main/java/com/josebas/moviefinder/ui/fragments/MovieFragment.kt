@@ -27,7 +27,7 @@ class MovieFragment : Fragment(), KodeinAware {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentMovieBinding.inflate(inflater, container, false)
 
@@ -36,7 +36,7 @@ class MovieFragment : Fragment(), KodeinAware {
         return binding.root
     }
 
-    private fun loadRecyclerView() = with(binding) {
+    private fun loadRecyclerView(): Unit = with(binding) {
         CoroutineScope(Dispatchers.Main).launch {
             val movies = withContext(Dispatchers.IO) {
                 movieRepository.getPopularMovies()
