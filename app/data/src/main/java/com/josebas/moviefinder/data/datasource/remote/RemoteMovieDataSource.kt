@@ -4,8 +4,10 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.josebas.moviefinder.data.common.API_KEY
 import com.josebas.moviefinder.data.common.BASE_URL
 import com.josebas.moviefinder.domain.remote.RemoteResultMovie
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -13,16 +15,16 @@ import retrofit2.http.GET
 
 interface RemoteMovieDataSource {
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(): RemoteResultMovie
+    suspend fun getTopRatedMovies(): Response<RemoteResultMovie>
 
     @GET("movie/popular")
-    suspend fun getPopularMovies(): RemoteResultMovie
+    suspend fun getPopularMovies(): Response<RemoteResultMovie>
 
     @GET("movie/upcoming")
-    suspend fun getUpComingMovies(): RemoteResultMovie
+    suspend fun getUpComingMovies(): Response<RemoteResultMovie>
 
     companion object {
-        operator fun invoke(pathUrl: String = BASE_URL): RemoteMovieDataSource {
+        operator fun invoke(pathUrl: HttpUrl = HttpUrl.parse(BASE_URL)!!): RemoteMovieDataSource {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()

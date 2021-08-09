@@ -8,6 +8,7 @@ import com.josebas.moviefinder.domain.common.GenresDataSource
 import com.josebas.moviefinder.domain.remote.RemoteMovie
 import com.josebas.moviefinder.domain.remote.RemoteResultMovie
 import kotlinx.coroutines.runBlocking
+import retrofit2.Response
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
@@ -43,9 +44,9 @@ internal class MovieRepositoryImplTest {
         val remoteResultMovie = RemoteResultMovie(listOf(remoteMovie))
 
         runBlocking {
-            `when`(remoteMovieDataSource.getPopularMovies()).thenReturn(remoteResultMovie)
-            `when`(remoteMovieDataSource.getTopRatedMovies()).thenReturn(remoteResultMovie)
-            `when`(remoteMovieDataSource.getUpComingMovies()).thenReturn(remoteResultMovie)
+            `when`(remoteMovieDataSource.getPopularMovies()).thenReturn(Response.success(remoteResultMovie))
+            `when`(remoteMovieDataSource.getTopRatedMovies()).thenReturn(Response.success(remoteResultMovie) )
+            `when`(remoteMovieDataSource.getUpComingMovies()).thenReturn(Response.success(remoteResultMovie))
         }
     }
 

@@ -38,6 +38,9 @@ android {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     def ok_http_version = "3.14.9"
     // bottom bar navigation

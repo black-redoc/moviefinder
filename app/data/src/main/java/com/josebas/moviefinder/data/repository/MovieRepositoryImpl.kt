@@ -8,17 +8,20 @@ import com.josebas.moviefinder.domain.local.Movie
 class MovieRepositoryImpl(
     private val remoteMovieDataSource: RemoteMovieDataSource,
     private val genresDataSource: GenresDataSource
-): MovieRepository {
+) : MovieRepository {
 
-    override suspend fun getPopularMovies(): List<Movie>  = with(remoteMovieDataSource.getPopularMovies()) {
-        return results.toLocalMovies(genresDataSource)
-    }
+    override suspend fun getPopularMovies(): List<Movie> =
+        with(remoteMovieDataSource.getPopularMovies()) {
+            return body()!!.results.toLocalMovies(genresDataSource)
+        }
 
-    override suspend fun getRatedMovies(): List<Movie> = with(remoteMovieDataSource.getTopRatedMovies()) {
-        return results.toLocalMovies(genresDataSource)
-    }
+    override suspend fun getRatedMovies(): List<Movie> =
+        with(remoteMovieDataSource.getTopRatedMovies()) {
+            return body()!!.results.toLocalMovies(genresDataSource)
+        }
 
-    override suspend fun getUpComingMovies(): List<Movie> = with(remoteMovieDataSource.getUpComingMovies()) {
-        return results.toLocalMovies(genresDataSource)
-    }
+    override suspend fun getUpComingMovies(): List<Movie> =
+        with(remoteMovieDataSource.getUpComingMovies()) {
+            return body()!!.results.toLocalMovies(genresDataSource)
+        }
 }
