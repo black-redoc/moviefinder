@@ -11,6 +11,6 @@ class TVShowRepositoryImpl(
 ): TVShowRepository {
 
     override suspend fun getPopularTVShow(): List<TVShow> = with(remoteTVShowDataSource.getPopularTVShow()) {
-        return results.toLocalTVShows(genresDataSource)
+        return body()!!.results.toLocalTVShows(genresDataSource)
     }
 }

@@ -14,6 +14,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
+import retrofit2.Response
 
 @RunWith(MockitoJUnitRunner::class)
 internal class TVShowRepositoryImplTest {
@@ -44,7 +45,7 @@ internal class TVShowRepositoryImplTest {
         val remoteResultTvShow = RemoteResultTVShow(listOf(remoteTVShow))
 
         runBlocking {
-            `when`(remoteTVShowDataSource.getPopularTVShow()).thenReturn(remoteResultTvShow)
+            `when`(remoteTVShowDataSource.getPopularTVShow()).thenReturn(Response.success(remoteResultTvShow))
         }
     }
 

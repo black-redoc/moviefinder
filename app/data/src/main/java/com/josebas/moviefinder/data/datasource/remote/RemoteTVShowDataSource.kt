@@ -4,18 +4,20 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.josebas.moviefinder.data.common.API_KEY
 import com.josebas.moviefinder.data.common.BASE_URL
 import com.josebas.moviefinder.domain.remote.RemoteResultTVShow
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface RemoteTVShowDataSource {
     @GET("tv/popular")
-    suspend fun getPopularTVShow(): RemoteResultTVShow
+    suspend fun getPopularTVShow(): Response<RemoteResultTVShow>
 
     companion object {
-        operator fun invoke(): RemoteTVShowDataSource {
+        operator fun invoke(pathUrl: HttpUrl = HttpUrl.parse(BASE_URL)!!): RemoteTVShowDataSource {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
@@ -35,7 +37,7 @@ interface RemoteTVShowDataSource {
             return Retrofit
                 .Builder()
                 .client(okHttpClient)
-                .baseUrl(BASE_URL)
+                .baseUrl(pathUrl)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
