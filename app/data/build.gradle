@@ -8,6 +8,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_7
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     def retrofit_version = "2.9.0"
     def ok_http_version = "3.14.9"
