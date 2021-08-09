@@ -15,8 +15,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
-const val BASE_URL = "http://www.test.com"
-
 @RunWith(MockitoJUnitRunner::class)
 internal class MovieRepositoryImplTest {
     @Mock
